@@ -1,0 +1,145 @@
+1. Используя команду cat, создать два файла с данными, а затем объединить их. Просмотреть содержимое созданного файла. Переименовать файл, дав ему новое имя.
+
+elena@elena-VirtualBox:~$ cd HomeWork_2/
+elena@elena-VirtualBox:~/HomeWork_2$ cat > file_1
+Hello, world
+elena@elena-VirtualBox:~/HomeWork_2$ cat > file_2
+It's me
+elena@elena-VirtualBox:~/HomeWork_2$ cat file_1 file_2 > shared_file
+elena@elena-VirtualBox:~/HomeWork_2$ cat shared_file
+Hello, world
+It's me
+elena@elena-VirtualBox:~/HomeWork_2$ mv shared_file new_name_file
+elena@elena-VirtualBox:~/HomeWork_2$ ll
+итого 20
+drwxrwxr-x  2 elena elena 4096 авг  3 07:32 ./
+drwxr-x--- 19 elena elena 4096 авг  3 07:27 ../
+-rw-rw-r--  1 elena elena   13 авг  3 07:28 file_1
+-rw-rw-r--  1 elena elena    8 авг  3 07:28 file_2
+-rw-rw-r--  1 elena elena   21 авг  3 07:30 new_name_file
+elena@elena-VirtualBox:~/HomeWork_2$
+
+2. Создать несколько файлов. Создать директорию, переместить файл туда. Удалить все созданные в этом и предыдущем задании директории и файлы.
+
+elena@elena-VirtualBox:~/HomeWork_2$ touch file_3
+elena@elena-VirtualBox:~/HomeWork_2$ touch file_4
+elena@elena-VirtualBox:~/HomeWork_2$ mkdir new_directory
+elena@elena-VirtualBox:~/HomeWork_2$ ll
+итого 24
+drwxrwxr-x  3 elena elena 4096 авг  3 07:43 ./
+drwxr-x--- 19 elena elena 4096 авг  3 07:27 ../
+-rw-rw-r--  1 elena elena   13 авг  3 07:28 file_1
+-rw-rw-r--  1 elena elena    8 авг  3 07:28 file_2
+-rw-rw-r--  1 elena elena    0 авг  3 07:43 file_3
+-rw-rw-r--  1 elena elena    0 авг  3 07:43 file_4
+drwxrwxr-x  2 elena elena 4096 авг  3 07:43 new_directory/
+-rw-rw-r--  1 elena elena   21 авг  3 07:30 new_name_file
+elena@elena-VirtualBox:~/HomeWork_2$ mv file_3 /home/elena/HomeWork_2/new_directory/
+elena@elena-VirtualBox:~/HomeWork_2$ mv file_4 /home/elena/HomeWork_2/new_directory/
+elena@elena-VirtualBox:~/HomeWork_2$ cd new_directory/
+elena@elena-VirtualBox:~/HomeWork_2/new_directory$ ll
+итого 8
+drwxrwxr-x 2 elena elena 4096 авг  3 07:44 ./
+drwxrwxr-x 3 elena elena 4096 авг  3 07:44 ../
+-rw-rw-r-- 1 elena elena    0 авг  3 07:43 file_3
+-rw-rw-r-- 1 elena elena    0 авг  3 07:43 file_4
+elena@elena-VirtualBox:~/HomeWork_2/new_directory$
+elena@elena-VirtualBox:~/HomeWork_2/new_directory$ cd
+elena@elena-VirtualBox:~$ rm -rf HomeWork_2/
+elena@elena-VirtualBox:~$
+elena@elena-VirtualBox:~$ ls
+ shared   testfolder   Документы   Изображения   Общедоступные   Шаблоны
+ snap     Видео        Загрузки    Музыка       'Рабочий стол'
+
+3. Создать файл file1 и наполнить его произвольным содержимым. Скопировать его в file2. Создать символическую ссылку file3 на file1. Создать жесткую ссылку file4 на file1. Посмотреть, какие айноды у файлов. Удалить file1. Что стало с остальными созданными файлами? Попробовать вывести их на экран.
+
+elena@elena-VirtualBox:~$ mkdir HomeWork_2
+elena@elena-VirtualBox:~$ cd HomeWork_2/
+elena@elena-VirtualBox:~/HomeWork_2$ touch file1
+elena@elena-VirtualBox:~/HomeWork_2$ cat >> file1
+agfajgJCjh
+alfhkajvb
+lskvhfjkvh
+elena@elena-VirtualBox:~/HomeWork_2$ cp file1 file2
+elena@elena-VirtualBox:~/HomeWork_2$ cat file2
+agfajgJCjh
+alfhkajvb
+lskvhfjkvh
+elena@elena-VirtualBox:~/HomeWork_2$ ln -s file1 file3
+elena@elena-VirtualBox:~/HomeWork_2$ ln file2 file4
+elena@elena-VirtualBox:~/HomeWork_2$ ls -ali
+итого 20
+924944 drwxrwxr-x  2 elena elena 4096 авг  3 07:54 .
+918126 drwxr-x--- 19 elena elena 4096 авг  3 07:51 ..
+924961 -rw-rw-r--  1 elena elena   32 авг  3 07:52 file1
+924962 -rw-rw-r--  2 elena elena   32 авг  3 07:53 file2
+924963 lrwxrwxrwx  1 elena elena    5 авг  3 07:54 file3 -> file1
+924962 -rw-rw-r--  2 elena elena   32 авг  3 07:53 file4
+elena@elena-VirtualBox:~/HomeWork_2$ rm -f file1
+elena@elena-VirtualBox:~/HomeWork_2$ ls -ali
+итого 16
+924944 drwxrwxr-x  2 elena elena 4096 авг  3 07:56 .
+918126 drwxr-x--- 19 elena elena 4096 авг  3 07:51 ..
+924962 -rw-rw-r--  2 elena elena   32 авг  3 07:53 file2
+924963 lrwxrwxrwx  1 elena elena    5 авг  3 07:54 file3 -> file1 (Выделена красным, т.к. файл на который ссылается отсутствует)
+924962 -rw-rw-r--  2 elena elena   32 авг  3 07:53 file4
+
+
+4. Дать созданным файлам другие, произвольные имена. Создать новую символическую ссылку. Переместить ссылки в другую директорию.
+
+elena@elena-VirtualBox:~/HomeWork_2$ ll
+итого 20
+drwxrwxr-x  2 elena elena 4096 авг  3 07:59 ./
+drwxr-x--- 19 elena elena 4096 авг  3 07:51 ../
+-rw-rw-r--  1 elena elena   32 авг  3 07:59 file1
+-rw-rw-r--  2 elena elena   32 авг  3 07:53 file2
+lrwxrwxrwx  1 elena elena    5 авг  3 07:54 file3 -> file1
+-rw-rw-r--  2 elena elena   32 авг  3 07:53 file4
+elena@elena-VirtualBox:~/HomeWork_2$ mv file1 file1_new
+elena@elena-VirtualBox:~/HomeWork_2$ mv file2 file2_new
+elena@elena-VirtualBox:~/HomeWork_2$ ll
+итого 20
+drwxrwxr-x  2 elena elena 4096 авг  3 08:00 ./
+drwxr-x--- 19 elena elena 4096 авг  3 07:51 ../
+-rw-rw-r--  1 elena elena   32 авг  3 07:59 file1_new
+-rw-rw-r--  2 elena elena   32 авг  3 07:53 file2_new
+lrwxrwxrwx  1 elena elena    5 авг  3 07:54 file3 -> file1 (Выделена красным, т.к. файл на который ссылается отсутствует)
+-rw-rw-r--  2 elena elena   32 авг  3 07:53 file4
+elena@elena-VirtualBox:~/HomeWork_2$ ln -s file1_new file3_new
+elena@elena-VirtualBox:~/HomeWork_2$ ll
+итого 20
+drwxrwxr-x  2 elena elena 4096 авг  3 08:02 ./
+drwxr-x--- 19 elena elena 4096 авг  3 07:51 ../
+-rw-rw-r--  1 elena elena   32 авг  3 07:59 file1_new
+-rw-rw-r--  2 elena elena   32 авг  3 07:53 file2_new
+lrwxrwxrwx  1 elena elena    5 авг  3 07:54 file3 -> file1 (Выделена красным, т.к. файл на который ссылается отсутствует)
+lrwxrwxrwx  1 elena elena    9 авг  3 08:02 file3_new -> file1_new (Ссылка работает)
+-rw-rw-r--  2 elena elena   32 авг  3 07:53 file4
+elena@elena-VirtualBox:~/HomeWork_2$ mkdir new_derektory
+elena@elena-VirtualBox:~/HomeWork_2$ ll
+итого 24
+drwxrwxr-x  3 elena elena 4096 авг  3 08:04 ./
+drwxr-x--- 19 elena elena 4096 авг  3 07:51 ../
+-rw-rw-r--  1 elena elena   32 авг  3 07:59 file1_new
+-rw-rw-r--  2 elena elena   32 авг  3 07:53 file2_new
+lrwxrwxrwx  1 elena elena    5 авг  3 07:54 file3 -> file1
+lrwxrwxrwx  1 elena elena    9 авг  3 08:02 file3_new -> file1_new
+-rw-rw-r--  2 elena elena   32 авг  3 07:53 file4
+drwxrwxr-x  2 elena elena 4096 авг  3 08:04 new_derektory/
+elena@elena-VirtualBox:~/HomeWork_2$ mv file3_new /home/elena/HomeWork_2/new_derektory/
+elena@elena-VirtualBox:~/HomeWork_2$ ll
+итого 24
+drwxrwxr-x  3 elena elena 4096 авг  3 08:04 ./
+drwxr-x--- 19 elena elena 4096 авг  3 07:51 ../
+-rw-rw-r--  1 elena elena   32 авг  3 07:59 file1_new
+-rw-rw-r--  2 elena elena   32 авг  3 07:53 file2_new
+lrwxrwxrwx  1 elena elena    5 авг  3 07:54 file3 -> file1
+-rw-rw-r--  2 elena elena   32 авг  3 07:53 file4
+drwxrwxr-x  2 elena elena 4096 авг  3 08:04 new_derektory/
+elena@elena-VirtualBox:~/HomeWork_2$ cd new_derektory/
+elena@elena-VirtualBox:~/HomeWork_2/new_derektory$ ll
+итого 8
+drwxrwxr-x 2 elena elena 4096 авг  3 08:04 ./
+drwxrwxr-x 3 elena elena 4096 авг  3 08:04 ../
+lrwxrwxrwx 1 elena elena    9 авг  3 08:02 file3_new -> file1_new (Выделена красным, т.к. файл на который ссылается отсутствует в директории)
+elena@elena-VirtualBox:~/HomeWork_2/new_derektory$
