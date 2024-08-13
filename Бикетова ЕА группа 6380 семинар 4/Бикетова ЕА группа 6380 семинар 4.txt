@@ -1,0 +1,22 @@
+1. Подключить репозиторий с nginx любым удобным способом, установить nginx и потом удалить nginx, используя утилиту dpkg.
+
+elena@elena-VirtualBox:~$ sudo apt install curl gnupg2 ca-certificates lsb-release ubuntu-keyring
+elena@elena-VirtualBox:~$ curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor \
+    | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
+elena@elena-VirtualBox:~$ gpg --dry-run --quiet --no-keyring --import --import-options import-show /usr/share/keyrings/nginx-archive-keyring.gpg
+elena@elena-VirtualBox:~$ echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] \
+http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" \
+    | sudo tee /etc/apt/sources.list.d/nginx.list
+elena@elena-VirtualBox:~$ echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" \
+    | sudo tee /etc/apt/preferences.d/99nginx
+
+sudo apt install -y nginx
+sudo dpkg -r nginx
+
+
+2. Установить пакет на свой выбор, используя snap.
+
+elena@elena-VirtualBox:~$ sudo snap install core
+elena@elena-VirtualBox:~$ sudo snap remove core
+
+
